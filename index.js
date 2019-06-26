@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+require('dotenv').config()
 
 const app = express();
 
@@ -28,14 +29,14 @@ app.post('/api/v1', (req, res) => {
     service: 'Gmail',
     port: 465,
     auth: {
-      user: 'USERNAME',
-      pass: 'PASSWORD'
+      user: process.env.USERNAME,
+      pass: process.env.PASSWORD
     }
   });
 
   var mailOptions = {
     from: data.email,
-    to: 'b.mort86@gmail.com',
+    to: process.env.USERNAME,
     subject: 'Someone has contacted you.',
     html: `<p>${data.name}</p>
           <p>${data.email}</p>
